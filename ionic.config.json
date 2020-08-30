@@ -1,5 +1,7 @@
 {
   "name": "notifier",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
