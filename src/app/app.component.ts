@@ -24,14 +24,23 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(async () => {
 
-      this.firebase.onNotificationReceived().subscribe(response => {
-        if (response && response.url) {
-          window.open(response.url);
-        }
-      });
+      try {
+        this.firebase.onNotificationReceived().subscribe(response => {
+          if (response && response.url) {
+            window.open(response.url);
+          }
+        });
 
-      await this.firebase.requestPermission();
-      const token = this.firebase.getToken();
+        await this.firebase.requestPermission();
+        const token = await this.firebase.getToken();
+        console.log(token);
+
+        // Token captured here can be sent to your custom-server for registration
+
+      } catch (error) {
+        console.log(error);
+      }
+
 
 
       this.statusBar.styleDefault();
